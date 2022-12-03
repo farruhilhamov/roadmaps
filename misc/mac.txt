@@ -1,0 +1,50 @@
+00:e0:20:0d:75:4b - Баха
+00:e0:20:0d:75:4b
+cc:2f:71:fb:d0:e7
+
+baha - 32:ae:fc:b5:10:32
+
+2E:BC:9E:B2:83:72 - bbsid
+1E:6B:E1:36:B3:61 - bssid new
+
+
+ CH  1 ][ Elapsed: 12 s ][ 2022-08-11 16:02 
+
+ BSSID              PWR  Beacons    #Data, #/s  CH   MB   ENC CIPHER  AUTH ESSID
+
+ 00:25:00:FF:94:73   -1        0        1    0   6   -1   OPN              <length:  0>      
+ 66:0F:05:4A:21:60  -24       20        1    0   6  180   WPA2 CCMP   PSK  TestHackAP22      
+ 1E:6B:E1:36:B3:61  -11       40        0    0  11   65   WPA2 CCMP   PSK  VictimCorp        
+ 9A:F1:F8:B0:7A:07  -34       11        0    0  13  180   WPA2 CCMP   PSK  TestHackAp12      
+ 80:AD:16:4D:AE:6D  -38        8        0    0   1   65   WPA2 CCMP   PSK  TestHackAP{35}    
+ B6:0C:37:67:D2:A7  -45        3        1    0   6  180   WPA2 CCMP   PSK  TestHackAP{33}    
+ 54:FC:F0:42:D4:80  -38        9        0    0  11   65   WPA2 CCMP   PSK  AndroidAPD480     
+ 9E:FE:19:24:B6:41  -40       10        0    0  11  130   WPA2 CCMP   PSK  Galaxy S21 5G1631 
+ 24:92:0E:95:E7:08  -43       10      576    0   1  180   WPA2 CCMP   PSK  TestHackAP27      
+ 3E:DD:1D:60:92:D4  -41       11        0    0   6   54   WPA2 CCMP   PSK  TestHackAP24      
+ A2:6C:36:E0:23:6D  -42        3        0    0   6  130   WPA2 CCMP   PSK  Erkelvis          
+ 9A:AF:65:C0:67:41  -40        7        0    0   6  130   WPA2 CCMP   PSK  DIRECT-EJDESKTOP-7
+ 1C:CC:D6:01:E4:EB  -40       16        0    0   3  180   WPA2 CCMP   PSK  TestHackAP1337    
+ 7A:37:9E:B0:E6:91  -32        7        0    0   6  180   WPA2 CCMP   PSK  TestHackAP{16}    
+ 4A:AB:09:81:AB:9F  -55       11        0    0  11   65   WPA2 CCMP   PSK  TestHackAP17      
+ 9A:F8:C0:FF:BD:23  -38       12       63    0  11  180   WPA2 CCMP   PSK  Java              
+ 46:5E:A0:4F:1B:02  -51        5        0    0   6  130   WPA3 CCMP   SAE  <length: 14>      
+ 4E:28:C4:74:8E:6C  -46        4        0    0   1  180   WPA2 CCMP   PSK  Redmi 9A          
+ 18:3A:2D:1E:27:99  -46        7        0    0   6   65   WPA2 CCMP   PSK  TestHackAP02      
+ FA:E6:1A:B8:AF:4D  -44       11        0    0   1  130   WPA2 CCMP   PSK  VictimCorpSudo    
+ 5E:FA:27:8F:A3:44  -44       10        0    0  11   65   WPA2 CCMP   PSK  TestHackAP25      
+ 0E:F5:74:4B:3E:6E  -51        9        0    0   6  180   WPA3 CCMP   SAE  Galaxy A224B7D    
+ FA:8B:E4:29:19:79  -48       13       31    0   1  180   WPA2 CCMP   PSK  Galaxya31         
+ 92:2A:81:E8:D8:FE  -56        9        0    0   6  180   WPA2 CCMP   PSK  TestHackAP32      
+ D8:63:75:93:0D:D1  -55        9        0    0   6   65   WPA2 CCMP   PSK  VictimCorp        
+ 48:FD:A3:89:5A:B3  -49        5        3    0   1   65   WPA2 CCMP   PSK  TestHackAP07      
+ 22:29:59:92:EE:B6  -52       11        1    0   6  130   WPA3 CCMP   SAE  iPhone 523423     
+ D2:E5:62:3C:FD:A4  -40        4        1    0   6  180   WPA2 CCMP   PSK  Crazy lady        
+ 5C:03:39:47:F1:F1  -44       10        0    0  11   65   WPA2 CCMP   PSK  TestHackAP34      
+ 72:C9:72:6E:32:3C  -53        2        0    0   1  360   WPA2 CCMP   PSK  TestHackApp53     
+ 94:18:82:8D:9C:10  -50        1       49    0   1  195   OPN              IUT               
+ 94:18:82:8D:9C:16  -55        3        0    0   1  195   WPA2 CCMP   MGT  IUTSTUDENTS       
+ 26:64:C0:5F:DA:B8  -55        3        0    0   6  130   WPA2 CCMP   PSK  <length: 17>      
+ 94:18:82:8D:88:14  -62        5        0    0  11  195   WPA2 CCMP   MGT  IUTSTUDENTS       
+ 0E:32:1D:A2:54:40  -59        6        1    0   1  180   WPA2 CCMP   PSK  VictimCorp        
+ 94:18:82:8D:88:10  -58        3      173   55  11  195   OPN              IUT

@@ -1,0 +1,18 @@
+Delegation using command promt:
+Set-ADAccountPassword sophie -Reset -NewPassword (Read-Host -AsSecureString -Prompt 'New Password') -Verbose
+
+Automatic changing password after logon:
+PS C:\Users\phillip> Set-ADUser -ChangePasswordAtLogon $true -Identity sophie -Verbose
+
+Creating some GPOs for THM Inc.
+
+Restrict Access to Control Panel
+
+We want to restrict access to the Control Panel across all machines to only the users that are part of the IT department. Users of other departments shouldn't be able to change the system's preferences.
+
+Let's create a new GPO called Restrict Control Panel Access and open it for editing. Since we want this GPO to apply to specific users, we will look under User Configuration for the following policy:
+
+Two protocols can be used for network authentication in windows domains:
+
+    Kerberos: Used by any recent version of Windows. This is the default protocol in any recent domain.
+    NetNTLM: Legacy authentication protocol kept for compatibility purposes.

