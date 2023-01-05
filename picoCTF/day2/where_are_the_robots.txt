@@ -1,0 +1,7 @@
+/robots.txt
+User-agent: *
+Disallow: /8028f.html
+
+
+picoCTF{no_clients_plz_7723ce}
+picoCTF{c0ngr4ts_u_r_1nv1t3d_aebcbf39}
